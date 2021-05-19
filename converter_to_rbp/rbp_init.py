@@ -77,6 +77,10 @@ with open('../input/input_data.json') as input_file:
             'memberDOB',
         ]
 
+        decimal_values = [
+            'billedAmount'
+        ]
+
         data_dictionary = each_data['_source']
 
         for each_field in required_fields:
@@ -85,6 +89,10 @@ with open('../input/input_data.json') as input_file:
 
                 if each_field in epoch_date_field:
                     value = datetime.datetime.fromtimestamp(long(data_dictionary[each_field]) / 1000).strftime('%Y-%m-%d')
+
+                if each_field in decimal_values:
+                    value = float(data_dictionary[each_field]) / 100
+
 
 
             else:
